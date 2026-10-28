@@ -4,3 +4,5 @@ python-multipart
 pillow==13.0.0
 pymupdf
 pillow-heif
+segno
+pytesseract
