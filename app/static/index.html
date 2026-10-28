@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convert — change images and PDFs to any format</title>
+  <meta name="description" content="Free file converter. Turn PNG into JPG, PDF into images, photos into a PDF, and more. Files are never stored." />
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="top wrap">
+    <a class="brand" href="/" aria-label="Convert home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="15" height="20" rx="3" class="b1"/><rect x="14" y="6" width="15" height="20" rx="3" class="b2"/><path d="M12 16h9m-3-3 3 3-3 3" class="b3"/></svg>
+      Convert
+    </a>
+    <p class="promise">Files are converted and then deleted. Nothing is kept.</p>
+  </header>
+
+  <main class="wrap">
+    <h1>Turn any file into the one you need.</h1>
+    <p class="lead">Drop in images or PDFs, pick a format, and download. No sign-up.</p>
+
+    <section class="tray" id="tray" aria-label="Add files">
+      <input type="file" id="picker" multiple accept="image/*,.heic,.heif,application/pdf" hidden />
+      <div class="tray-empty" id="trayEmpty">
+        <svg class="tray-art" viewBox="0 0 120 80" aria-hidden="true">
+          <rect x="10" y="14" width="44" height="56" rx="6" class="f1"/>
+          <rect x="66" y="10" width="44" height="56" rx="6" class="f2"/>
+          <path d="M44 42h32m-8-8 8 8-8 8" class="arr"/>
+        </svg>
+        <p class="tray-title">Drop files here</p>
+        <p class="tray-sub">or <button type="button" class="link" id="choose">choose from your device</button></p>
+        <p class="tray-hint">PNG, JPG, WEBP, HEIC, GIF, BMP, TIFF and PDF. Up to 20 files, 25 MB each.</p>
+      </div>
+      <ul class="files" id="files" hidden></ul>
+      <div class="tray-actions" id="trayActions" hidden>
+        <button type="button" class="ghost" id="addMore">Add more files</button>
+        <button type="button" class="ghost" id="clearAll">Remove all</button>
+      </div>
+    </section>
+
+    <section class="targets" id="targetsSection" aria-labelledby="toLabel">
+      <h2 id="toLabel">Convert to</h2>
+      <div class="tickets" id="tickets" role="radiogroup" aria-labelledby="toLabel"></div>
+    </section>
+
+    <section class="opts" id="opts">
+      <label class="opt" id="qualityOpt">
+        <span class="opt-name">Image quality <output id="qualityOut">90</output></span>
+        <input type="range" id="quality" min="40" max="100" step="5" value="90" />
+        <span class="opt-help">Lower makes smaller files. 90 looks the same as the original to most people.</span>
+      </label>
+      <label class="opt" id="dpiOpt">
+        <span class="opt-name">PDF page sharpness</span>
+        <select id="dpi">
+          <option value="100">Screen (smaller files)</option>
+          <option value="150" selected>Standard</option>
+          <option value="300">Print (sharpest, larger files)</option>
+        </select>
+        <span class="opt-help">Used when turning PDF pages into images.</span>
+      </label>
+    </section>
+
+    <div class="go">
+      <button type="button" class="convert" id="convert" disabled>Add files to start</button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </div>
+  </main>
+
+  <footer class="wrap foot">
+    <p>Made by <a href="https://shanmugam.is-a.dev">Shanmugam</a>. Your files go straight to the converter and are deleted as soon as you download the result.</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

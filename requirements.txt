@@ -1,0 +1,6 @@
+fastapi==0.162.0
+uvicorn[standard]
+python-multipart
+pillow==13.0.0
+pymupdf
+pillow-heif
