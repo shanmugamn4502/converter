@@ -253,7 +253,7 @@ function selectTool(id, focus) {
 
   $('toolTitle').textContent = tool.title;
   $('toolBlurb').textContent = tool.blurb;
-  document.title = `${tool.title} | File tools`;
+  document.title = `${tool.title} | Converter`;
 
   tray.hidden = !!tool.noFiles;
   $('trayTitle').textContent = tool.multiple ? 'Drop files here' : 'Drop a file here';

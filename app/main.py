@@ -18,7 +18,7 @@ STATIC = Path(__file__).parent / "static"
 light_slots = threading.BoundedSemaphore(2)
 heavy_slots = threading.BoundedSemaphore(1)
 
-app = FastAPI(title="File tools", docs_url=None, redoc_url=None)
+app = FastAPI(title="Converter", docs_url=None, redoc_url=None)
 
 
 @contextmanager
