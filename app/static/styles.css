@@ -24,7 +24,7 @@ body {
   font: 400 1.0625rem/1.6 var(--body);
 }
 
-.wrap { width: min(100% - 2.5rem, 60rem); margin-inline: auto; }
+.wrap { width: min(100% - 3rem, 82rem); margin-inline: auto; }
 
 a { color: var(--cobalt-deep); }
 
@@ -162,7 +162,7 @@ h1 {
 /* ---------- layout: tool menu + panel ---------- */
 .layout {
   display: grid;
-  grid-template-columns: 12rem minmax(0, 1fr);
+  grid-template-columns: 13rem minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
   padding-bottom: 3rem;
