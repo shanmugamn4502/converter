@@ -1,0 +1,60 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-converter
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      # Heavy-tool tests skip themselves when ffmpeg/tesseract/soffice are
+      # missing, so this stays fast.
+      - name: Test
+        run: |
+          pip install -q -r requirements.txt pytest httpx
+          python -m pytest -q
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Upload code
+        run: |
+          rsync -az --delete \
+            --exclude '.git' --exclude '.github' --exclude '.venv' --exclude 'tests' \
+            --exclude '__pycache__' --exclude '.pytest_cache' \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=yes" \
+            ./ "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/converter/"
+
+      - name: Install and restart
+        run: |
+          ssh -i ~/.ssh/deploy_key "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" \
+            'cd /var/www/converter && .venv/bin/pip install -q -r requirements.txt && sudo systemctl restart converter'
+
+      - name: Verify
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://${{ secrets.EC2_HOST }}/api/health") && [ "$code" = 200 ] && echo "HTTP 200" && exit 0
+            sleep 3
+          done
+          echo "Health check failed (last HTTP $code)"; exit 1
+
+      - name: Clean up key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
