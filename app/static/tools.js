@@ -33,7 +33,7 @@ window.TOOLS = [
     id: 'convert', group: 'Convert', nav: 'Change format',
     title: 'Change file format',
     blurb: 'Turn images and PDFs into the format you need: PNG to JPG, PDF to images, photos to a PDF.',
-    endpoint: '/api/convert', exts: [...IMG, ...PDF], multiple: true, maxFiles: 20, maxMB: 25,
+    endpoint: 'api/convert', exts: [...IMG, ...PDF], multiple: true, maxFiles: 20, maxMB: 25,
     hint: `${IMG_HINT} or PDF. Up to 20 files, 25 MB each.`,
     options: [
       {
@@ -66,7 +66,7 @@ window.TOOLS = [
     id: 'compress-image', group: 'Images', nav: 'Compress',
     title: 'Compress images',
     blurb: 'Make photos smaller for email, WhatsApp or upload forms. Location and camera details are removed too.',
-    endpoint: '/api/image/compress', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
+    endpoint: 'api/image/compress', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
     hint: `${IMG_HINT}. Up to 20 files, 25 MB each.`,
     options: [
       { type: 'tickets', name: 'level', label: 'How much smaller', value: 'balanced', items: LEVELS },
@@ -80,7 +80,7 @@ window.TOOLS = [
     id: 'resize', group: 'Images', nav: 'Resize',
     title: 'Resize images',
     blurb: 'Set an exact size in pixels, scale by percentage, or pick a ready-made size for forms and social media.',
-    endpoint: '/api/image/resize', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
+    endpoint: 'api/image/resize', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
     hint: `${IMG_HINT}. Up to 20 files, 25 MB each.`,
     options: [
       {
@@ -119,7 +119,7 @@ window.TOOLS = [
     id: 'crop-rotate', group: 'Images', nav: 'Crop and rotate',
     title: 'Crop and rotate',
     blurb: 'Fix sideways photos, mirror them, or trim to a square or another shape. Cropping keeps the centre.',
-    endpoint: '/api/image/crop-rotate', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
+    endpoint: 'api/image/crop-rotate', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
     hint: `${IMG_HINT}. Up to 20 files, 25 MB each.`,
     options: [
       {
@@ -148,7 +148,7 @@ window.TOOLS = [
     id: 'remove-metadata', group: 'Images', nav: 'Remove location data',
     title: 'Remove location and camera details',
     blurb: 'Phone photos can contain the exact place they were taken. Remove it, along with the camera and date, before you share.',
-    endpoint: '/api/image/remove-metadata', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
+    endpoint: 'api/image/remove-metadata', exts: IMG, multiple: true, maxFiles: 20, maxMB: 25,
     hint: `${IMG_HINT}. Up to 20 files, 25 MB each.`,
     options: [],
     action: (v, s) => `Clean ${plural(s.count, 'photo')}`,
@@ -157,7 +157,7 @@ window.TOOLS = [
     id: 'favicon', group: 'Images', nav: 'Favicon maker',
     title: 'Favicon maker',
     blurb: 'Turn a logo into every icon size a website needs, with the HTML to paste into your page.',
-    endpoint: '/api/image/favicon', exts: IMG, multiple: false, maxFiles: 1, maxMB: 25,
+    endpoint: 'api/image/favicon', exts: IMG, multiple: false, maxFiles: 1, maxMB: 25,
     hint: 'One square-ish logo, ideally 512 × 512 or larger. PNG with a transparent background works best.',
     options: [],
     action: () => 'Make favicon set',
@@ -168,7 +168,7 @@ window.TOOLS = [
     id: 'merge-pdf', group: 'PDF', nav: 'Merge',
     title: 'Merge PDFs',
     blurb: 'Combine several PDFs into one. Use the arrows to set the order.',
-    endpoint: '/api/pdf/merge', exts: PDF, multiple: true, ordered: true, minFiles: 2, maxFiles: 30, maxMB: 25,
+    endpoint: 'api/pdf/merge', exts: PDF, multiple: true, ordered: true, minFiles: 2, maxFiles: 30, maxMB: 25,
     hint: 'Two or more PDFs. Up to 30 files, 25 MB each.',
     options: [],
     action: (v, s) => (s.count < 2 ? 'Add at least two PDFs' : `Merge ${s.count} PDFs`),
@@ -177,7 +177,7 @@ window.TOOLS = [
     id: 'split-pdf', group: 'PDF', nav: 'Split',
     title: 'Split a PDF',
     blurb: 'Keep only the pages you need, or save every page as its own PDF.',
-    endpoint: '/api/pdf/split', exts: PDF, multiple: false, maxFiles: 1, maxMB: 50,
+    endpoint: 'api/pdf/split', exts: PDF, multiple: false, maxFiles: 1, maxMB: 50,
     hint: 'One PDF, up to 50 MB.',
     options: [
       {
@@ -198,7 +198,7 @@ window.TOOLS = [
     id: 'compress-pdf', group: 'PDF', nav: 'Compress',
     title: 'Compress a PDF',
     blurb: 'Shrink scanned PDFs to fit upload limits on job and government portals.',
-    endpoint: '/api/pdf/compress', exts: PDF, multiple: false, maxFiles: 1, maxMB: 50,
+    endpoint: 'api/pdf/compress', exts: PDF, multiple: false, maxFiles: 1, maxMB: 50,
     hint: 'One PDF, up to 50 MB.',
     options: [
       { type: 'tickets', name: 'level', label: 'How much smaller', value: 'balanced', items: LEVELS },
@@ -213,7 +213,7 @@ window.TOOLS = [
     id: 'word-to-pdf', group: 'PDF', nav: 'Word to PDF',
     title: 'Word to PDF',
     blurb: 'Turn a Word document into a PDF that looks the same on every device.',
-    endpoint: '/api/pdf/from-word', exts: DOC, multiple: false, maxFiles: 1, maxMB: 20, heavy: true,
+    endpoint: 'api/pdf/from-word', exts: DOC, multiple: false, maxFiles: 1, maxMB: 20, heavy: true,
     hint: 'One .docx, .doc, .odt or .rtf file, up to 20 MB.',
     options: [],
     action: () => 'Convert to PDF',
@@ -224,7 +224,7 @@ window.TOOLS = [
     id: 'video-mp3', group: 'Video', nav: 'Video to MP3',
     title: 'Video to MP3',
     blurb: 'Pull the sound out of a video and save it as an MP3.',
-    endpoint: '/api/video', fixed: { action: 'mp3' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
+    endpoint: 'api/video', fixed: { action: 'mp3' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
     hint: 'One video you made or own: MP4, MOV, WEBM, MKV or AVI. Up to 100 MB and 10 minutes.',
     options: [],
     action: () => 'Save as MP3',
@@ -233,7 +233,7 @@ window.TOOLS = [
     id: 'video-gif', group: 'Video', nav: 'Video to GIF',
     title: 'Video to GIF',
     blurb: 'Turn a short moment from a video into a looping GIF.',
-    endpoint: '/api/video', fixed: { action: 'gif' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
+    endpoint: 'api/video', fixed: { action: 'gif' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
     hint: 'One video: MP4, MOV, WEBM, MKV or AVI. Up to 100 MB.',
     options: [
       { type: 'number', name: 'start', label: 'Start at', suffix: 'seconds', value: 0, min: 0, max: 600 },
@@ -249,7 +249,7 @@ window.TOOLS = [
     id: 'video-compress', group: 'Video', nav: 'Compress video',
     title: 'Compress a video',
     blurb: 'Make a video small enough to send on WhatsApp or by email.',
-    endpoint: '/api/video', fixed: { action: 'compress' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
+    endpoint: 'api/video', fixed: { action: 'compress' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
     hint: 'One video: MP4, MOV, WEBM, MKV or AVI. Up to 100 MB and 10 minutes.',
     options: [
       { type: 'tickets', name: 'level', label: 'How much smaller', value: 'balanced', items: [
@@ -264,7 +264,7 @@ window.TOOLS = [
     id: 'video-mp4', group: 'Video', nav: 'Convert to MP4',
     title: 'Convert to MP4',
     blurb: 'Turn iPhone MOV files and other videos into MP4, which plays on every phone, computer and website.',
-    endpoint: '/api/video', fixed: { action: 'mp4' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
+    endpoint: 'api/video', fixed: { action: 'mp4' }, exts: VID, multiple: false, maxFiles: 1, maxMB: 100, heavy: true,
     hint: 'One video: MOV, WEBM, MKV, AVI or 3GP. Up to 100 MB and 10 minutes.',
     options: [],
     action: () => 'Convert to MP4',
@@ -275,7 +275,7 @@ window.TOOLS = [
     id: 'ocr', group: 'Text and codes', nav: 'Text from image',
     title: 'Copy text from an image',
     blurb: 'Get the words out of a photo, screenshot or scanned PDF so you can copy and edit them.',
-    endpoint: '/api/ocr', exts: [...IMG, ...PDF], multiple: true, maxFiles: 10, maxMB: 25, heavy: true, result: 'text',
+    endpoint: 'api/ocr', exts: [...IMG, ...PDF], multiple: true, maxFiles: 10, maxMB: 25, heavy: true, result: 'text',
     hint: `${IMG_HINT}, or a scanned PDF up to 20 pages.`,
     options: [
       { type: 'select', name: 'lang', label: 'Language in the image', value: 'eng',
@@ -287,7 +287,7 @@ window.TOOLS = [
     id: 'qr', group: 'Text and codes', nav: 'QR code maker',
     title: 'QR code maker',
     blurb: 'Make a QR code for a link, a message, your Wi-Fi, or UPI payments.',
-    endpoint: '/api/qr', noFiles: true, result: 'qr',
+    endpoint: 'api/qr', noFiles: true, result: 'qr',
     options: [
       {
         type: 'tickets', name: 'kind', label: 'What it opens', value: 'link', compact: true,
